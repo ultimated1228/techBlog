@@ -1,3 +1,52 @@
 [
-  {}
+  {
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "David Smith",
+    "email": "david.smith@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Emily Davis",
+    "email": "emily.davis@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Michael Wilson",
+    "email": "michael.wilson@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Olivia Taylor",
+    "email": "olivia.taylor@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Sophia Martinez",
+    "email": "sophia.martinez@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Daniel Anderson",
+    "email": "daniel.anderson@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Emma Brown",
+    "email": "emma.brown@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Ethan Jones",
+    "email": "ethan.jones@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  },
+  {
+    "name": "Ava Moore",
+    "email": "ava.moore@example.com",
+    "password": "R3@nd0mP@ssw0rd"
+  }
 ]
