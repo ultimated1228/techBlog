@@ -1,6 +1,19 @@
 const router = require('express').Router();
 const { Blog, Comment, User } = require('../../models');
 
+router.get('/', async (req, res) => {
+    //create new blog
+    try {
+        const BlogData = await Blog.findAll({
+            include: [ User, Comment ]
+        });
+        res.status(200).json({ BlogData, success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Error processing request' });
+    }
+});
+
+
 router.post('/', async (req, res) => {
     //create new blog
     try {
