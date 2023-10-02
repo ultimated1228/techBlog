@@ -11,6 +11,7 @@ const checkLoggedIn = (req, res, next) => {
 };
 
 const renderBlogsView = async (req, res, template, additionalData = {}) => {
+  console.log(req.session.user_id)
   try {
     const dbblogsData = await Blog.findAll({
       where: { user_id: req.session.user_id },
@@ -23,6 +24,7 @@ const renderBlogsView = async (req, res, template, additionalData = {}) => {
       ],
     });
     const blogsData = dbblogsData.map((el) => el.get({ plain: true }));
+    console.log(blogsData);
 
     res.render('blogs', {
       title: 'Tech Blog',
@@ -37,17 +39,11 @@ const renderBlogsView = async (req, res, template, additionalData = {}) => {
   }
 };
 
-router.get('/register', (req, res) => {
-  if (req.session.logged_in) {
-    return res.redirect('/');
-  }
+router.get('/register', checkLoggedIn, (req, res) => {
   res.render('register', { title: 'register' });
 });
 
 router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    return res.redirect('/');
-  }
   res.render('login', { title: 'login' });
 });
 
@@ -60,6 +56,7 @@ router.get('/dashboard', checkLoggedIn, async (req, res) => {
   await renderBlogsView(req, res, 'dashboard');
 });
 
+// get a blog to edit by ID
 router.get('/blogs/edit/:id', async (req, res) => {
   if (!req.session.logged_in) {
     return res.redirect('/login');
