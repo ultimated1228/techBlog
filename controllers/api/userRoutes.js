@@ -20,9 +20,10 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     //create new User
     try {
+        console.log(req.body)
         const userData = await User.findOne({
             raw: true,
-            where: { name: req.body.name },
+            where: { email: req.body.email },
         });
         if (!userData) {
             res.status(404).json({ message: 'Login failed. Please try again!' });

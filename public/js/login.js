@@ -1,17 +1,18 @@
-import { makeRequest } from './helpers.js';
+import { makeRequest } from "./helpers.js";
 
 const loginForm = document.querySelector('#login-form');
 
 const handleLogin = async (event) => {
     event.preventDefault();
 
-    const name = document.querySelector('#name').value;
+    const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
 
-    if (name && password) {
+    if (email && password) {
         try {
+            console.log(email, password)
             const data = await makeRequest('/api/users/login', 'POST', {
-                name,
+                email,
                 password,
             });
 
@@ -29,4 +30,4 @@ const handleLogin = async (event) => {
     }
 };
 
-loginForm.addEventListener('submit', handleLogin);
+loginForm.addEventListener('click', handleLogin);

@@ -39,7 +39,7 @@ const renderBlogsView = async (req, res, template, additionalData = {}) => {
   }
 };
 
-router.get('/register', checkLoggedIn, (req, res) => {
+router.get('/register', (req, res) => {
   res.render('register', { title: 'register' });
 });
 
@@ -57,10 +57,7 @@ router.get('/dashboard', checkLoggedIn, async (req, res) => {
 });
 
 // get a blog to edit by ID
-router.get('/blogs/edit/:id', async (req, res) => {
-  if (!req.session.logged_in) {
-    return res.redirect('/login');
-  }
+router.get('/blogs/edit/:id', checkLoggedIn, async (req, res) => {
   try {
     const dbBlogsData = await Blog.findByPk(req.params.id);
     const blogsData = dbBlogsData.get({ plain: true });
@@ -122,9 +119,23 @@ router.get('/blogs/:id', async (req, res) => {
   }
 });
 
+// router.get('/', async (req, res) => {
+//   await renderBlogsView(req,res, 'blogs');
+// });
+
 router.get('/', async (req, res) => {
-  await renderBlogsView(req,res, 'blogs');
+  //find all blogs
+  try {
+      const BlogData = await Blog.findAll({
+          include: [ User, Comment ]
+      });
+      const blogMap = BlogData.map(eachBlog => eachBlog.get({plain: true}))
+      res.status(200).render( "homepage", {loggedIn: req.session.logged_in, BlogData: blogMap, success: true });
+  } catch (err) {
+      res.status(500).json({ error: 'Error processing request' });
+  }
 });
+
 
 router.get('/*', (req, res) => {
   res.redirect('/');

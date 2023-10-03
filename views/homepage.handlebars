@@ -1,2 +1,26 @@
+{{> navbar}}
+{{#if loggedIn}}
+<div>
+    {{#each BlogData}}  
+    <a href="blogs/{{id}}">{{blog_title}}</a>
+    {{/each}}
+</div>
+{{else}}
+<div>
+    {{#each BlogData}}  
+    <a href='/login'>{{blog_title}}</a>
+    {{/each}}
+</div>
 
-This is the homepage.handlebars page.
+
+{{/if}}
+{{> footer}}
+
+
+{{!-- {{#each BlogData}}
+{{this.blog_title}}
+
+{{/each}}
+{{BlogData.[0].blog_title}}
+{{BlogData.[0].blog_body}}
+{{BlogData.[0].user.name}} --}}
